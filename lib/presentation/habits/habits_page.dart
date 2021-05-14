@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracking_test/presentation/habits/widgets/habits_body.dart';
+import 'package:habit_tracking_test/presentation/habits/widgets/habits_switch.dart';
 import 'package:habit_tracking_test/presentation/router/app_router.gr.dart';
 
 class HabitsPage extends StatelessWidget {
@@ -10,7 +11,12 @@ class HabitsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Habits'),
       ),
-      body: const HabitsBody(),
+      body: Column(
+        children: [
+          HabitsSwitch(),
+          const HabitsBody(),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.router.push(const AddHabitPageRoute());
