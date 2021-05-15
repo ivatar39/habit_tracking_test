@@ -12,6 +12,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+HabitDto _$HabitDtoFromJson(Map<String, dynamic> json) {
+  return _HabitDto.fromJson(json);
+}
+
 /// @nodoc
 class _$HabitDtoTearOff {
   const _$HabitDtoTearOff();
@@ -21,11 +25,11 @@ class _$HabitDtoTearOff {
       required int count,
       required int date,
       required String description,
-      required List<int> doneDates,
+      @JsonKey(name: 'done_dates') List<int>? doneDates,
       required int frequency,
       required int priority,
       required int type,
-      @JsonKey(ignore: true) String? id}) {
+      required String uid}) {
     return _HabitDto(
       title: title,
       count: count,
@@ -35,8 +39,12 @@ class _$HabitDtoTearOff {
       frequency: frequency,
       priority: priority,
       type: type,
-      id: id,
+      uid: uid,
     );
+  }
+
+  HabitDto fromJson(Map<String, Object> json) {
+    return HabitDto.fromJson(json);
   }
 }
 
@@ -49,13 +57,14 @@ mixin _$HabitDto {
   int get count => throw _privateConstructorUsedError;
   int get date => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  List<int> get doneDates => throw _privateConstructorUsedError;
+  @JsonKey(name: 'done_dates')
+  List<int>? get doneDates => throw _privateConstructorUsedError;
   int get frequency => throw _privateConstructorUsedError;
   int get priority => throw _privateConstructorUsedError;
   int get type => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  String? get id => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HabitDtoCopyWith<HabitDto> get copyWith =>
       throw _privateConstructorUsedError;
@@ -70,11 +79,11 @@ abstract class $HabitDtoCopyWith<$Res> {
       int count,
       int date,
       String description,
-      List<int> doneDates,
+      @JsonKey(name: 'done_dates') List<int>? doneDates,
       int frequency,
       int priority,
       int type,
-      @JsonKey(ignore: true) String? id});
+      String uid});
 }
 
 /// @nodoc
@@ -95,7 +104,7 @@ class _$HabitDtoCopyWithImpl<$Res> implements $HabitDtoCopyWith<$Res> {
     Object? frequency = freezed,
     Object? priority = freezed,
     Object? type = freezed,
-    Object? id = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -117,7 +126,7 @@ class _$HabitDtoCopyWithImpl<$Res> implements $HabitDtoCopyWith<$Res> {
       doneDates: doneDates == freezed
           ? _value.doneDates
           : doneDates // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       frequency: frequency == freezed
           ? _value.frequency
           : frequency // ignore: cast_nullable_to_non_nullable
@@ -130,10 +139,10 @@ class _$HabitDtoCopyWithImpl<$Res> implements $HabitDtoCopyWith<$Res> {
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as int,
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -148,11 +157,11 @@ abstract class _$HabitDtoCopyWith<$Res> implements $HabitDtoCopyWith<$Res> {
       int count,
       int date,
       String description,
-      List<int> doneDates,
+      @JsonKey(name: 'done_dates') List<int>? doneDates,
       int frequency,
       int priority,
       int type,
-      @JsonKey(ignore: true) String? id});
+      String uid});
 }
 
 /// @nodoc
@@ -174,7 +183,7 @@ class __$HabitDtoCopyWithImpl<$Res> extends _$HabitDtoCopyWithImpl<$Res>
     Object? frequency = freezed,
     Object? priority = freezed,
     Object? type = freezed,
-    Object? id = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_HabitDto(
       title: title == freezed
@@ -196,7 +205,7 @@ class __$HabitDtoCopyWithImpl<$Res> extends _$HabitDtoCopyWithImpl<$Res>
       doneDates: doneDates == freezed
           ? _value.doneDates
           : doneDates // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       frequency: frequency == freezed
           ? _value.frequency
           : frequency // ignore: cast_nullable_to_non_nullable
@@ -209,28 +218,31 @@ class __$HabitDtoCopyWithImpl<$Res> extends _$HabitDtoCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as int,
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_HabitDto extends _HabitDto {
   const _$_HabitDto(
       {required this.title,
       required this.count,
       required this.date,
       required this.description,
-      required this.doneDates,
+      @JsonKey(name: 'done_dates') this.doneDates,
       required this.frequency,
       required this.priority,
       required this.type,
-      @JsonKey(ignore: true) this.id})
+      required this.uid})
       : super._();
+
+  factory _$_HabitDto.fromJson(Map<String, dynamic> json) =>
+      _$_$_HabitDtoFromJson(json);
 
   @override
   final String title;
@@ -241,7 +253,8 @@ class _$_HabitDto extends _HabitDto {
   @override
   final String description;
   @override
-  final List<int> doneDates;
+  @JsonKey(name: 'done_dates')
+  final List<int>? doneDates;
   @override
   final int frequency;
   @override
@@ -249,12 +262,11 @@ class _$_HabitDto extends _HabitDto {
   @override
   final int type;
   @override
-  @JsonKey(ignore: true)
-  final String? id;
+  final String uid;
 
   @override
   String toString() {
-    return 'HabitDto(title: $title, count: $count, date: $date, description: $description, doneDates: $doneDates, frequency: $frequency, priority: $priority, type: $type, id: $id)';
+    return 'HabitDto(title: $title, count: $count, date: $date, description: $description, doneDates: $doneDates, frequency: $frequency, priority: $priority, type: $type, uid: $uid)';
   }
 
   @override
@@ -281,8 +293,8 @@ class _$_HabitDto extends _HabitDto {
                     .equals(other.priority, priority)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+            (identical(other.uid, uid) ||
+                const DeepCollectionEquality().equals(other.uid, uid)));
   }
 
   @override
@@ -296,12 +308,17 @@ class _$_HabitDto extends _HabitDto {
       const DeepCollectionEquality().hash(frequency) ^
       const DeepCollectionEquality().hash(priority) ^
       const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(id);
+      const DeepCollectionEquality().hash(uid);
 
   @JsonKey(ignore: true)
   @override
   _$HabitDtoCopyWith<_HabitDto> get copyWith =>
       __$HabitDtoCopyWithImpl<_HabitDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_HabitDtoToJson(this);
+  }
 }
 
 abstract class _HabitDto extends HabitDto {
@@ -310,12 +327,14 @@ abstract class _HabitDto extends HabitDto {
       required int count,
       required int date,
       required String description,
-      required List<int> doneDates,
+      @JsonKey(name: 'done_dates') List<int>? doneDates,
       required int frequency,
       required int priority,
       required int type,
-      @JsonKey(ignore: true) String? id}) = _$_HabitDto;
+      required String uid}) = _$_HabitDto;
   const _HabitDto._() : super._();
+
+  factory _HabitDto.fromJson(Map<String, dynamic> json) = _$_HabitDto.fromJson;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -326,7 +345,8 @@ abstract class _HabitDto extends HabitDto {
   @override
   String get description => throw _privateConstructorUsedError;
   @override
-  List<int> get doneDates => throw _privateConstructorUsedError;
+  @JsonKey(name: 'done_dates')
+  List<int>? get doneDates => throw _privateConstructorUsedError;
   @override
   int get frequency => throw _privateConstructorUsedError;
   @override
@@ -334,8 +354,7 @@ abstract class _HabitDto extends HabitDto {
   @override
   int get type => throw _privateConstructorUsedError;
   @override
-  @JsonKey(ignore: true)
-  String? get id => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HabitDtoCopyWith<_HabitDto> get copyWith =>

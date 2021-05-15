@@ -61,6 +61,12 @@ class Priority extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
+  factory Priority.low() => Priority(predefinedPriorities[0]);
+
+  factory Priority.medium() => Priority(predefinedPriorities[1]);
+
+  factory Priority.high() => Priority(predefinedPriorities[2]);
+
   factory Priority(String input) {
     return Priority._(
       right(input),
@@ -74,6 +80,10 @@ class Type extends ValueObject<String> {
   static const List<String> predefinedTypes = ['Good', 'Bad'];
   @override
   final Either<ValueFailure<String>, String> value;
+
+  factory Type.bad() => Type(predefinedTypes.last);
+
+  factory Type.good() => Type(predefinedTypes.first);
 
   factory Type(String input) {
     return Type._(

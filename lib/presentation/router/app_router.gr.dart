@@ -7,8 +7,9 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../habits/add_habit_page.dart' as _i5;
-import '../habits/habits_page.dart' as _i4;
+import '../../domain/habits/habit.dart' as _i6;
+import '../habits/habit_form/habit_form_page.dart' as _i5;
+import '../habits/habit_overview/habits_overview_page.dart' as _i4;
 import '../splash/splash_page.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
@@ -22,15 +23,17 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return _i3.SplashPage();
         }),
-    HabitsPageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    HabitsOverviewPageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i4.HabitsPage();
+          return _i4.HabitsOverviewPage();
         }),
-    AddHabitPageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    HabitFormPageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return _i5.AddHabitPage();
+        builder: (data) {
+          final args = data.argsAs<HabitFormPageRouteArgs>();
+          return _i5.HabitFormPage(
+              key: args.key, editedHabit: args.editedHabit);
         },
         fullscreenDialog: true)
   };
@@ -38,8 +41,9 @@ class AppRouter extends _i1.RootStackRouter {
   @override
   List<_i1.RouteConfig> get routes => [
         _i1.RouteConfig(SplashPageRoute.name, path: '/'),
-        _i1.RouteConfig(HabitsPageRoute.name, path: '/habits-page'),
-        _i1.RouteConfig(AddHabitPageRoute.name, path: '/add-habit-page')
+        _i1.RouteConfig(HabitsOverviewPageRoute.name,
+            path: '/habits-overview-page'),
+        _i1.RouteConfig(HabitFormPageRoute.name, path: '/habit-form-page')
       ];
 }
 
@@ -49,14 +53,25 @@ class SplashPageRoute extends _i1.PageRouteInfo {
   static const String name = 'SplashPageRoute';
 }
 
-class HabitsPageRoute extends _i1.PageRouteInfo {
-  const HabitsPageRoute() : super(name, path: '/habits-page');
+class HabitsOverviewPageRoute extends _i1.PageRouteInfo {
+  const HabitsOverviewPageRoute() : super(name, path: '/habits-overview-page');
 
-  static const String name = 'HabitsPageRoute';
+  static const String name = 'HabitsOverviewPageRoute';
 }
 
-class AddHabitPageRoute extends _i1.PageRouteInfo {
-  const AddHabitPageRoute() : super(name, path: '/add-habit-page');
+class HabitFormPageRoute extends _i1.PageRouteInfo<HabitFormPageRouteArgs> {
+  HabitFormPageRoute({_i2.Key? key, required _i6.Habit? editedHabit})
+      : super(name,
+            path: '/habit-form-page',
+            args: HabitFormPageRouteArgs(key: key, editedHabit: editedHabit));
 
-  static const String name = 'AddHabitPageRoute';
+  static const String name = 'HabitFormPageRoute';
+}
+
+class HabitFormPageRouteArgs {
+  const HabitFormPageRouteArgs({this.key, required this.editedHabit});
+
+  final _i2.Key? key;
+
+  final _i6.Habit? editedHabit;
 }

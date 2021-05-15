@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
         state.map(
           initial: (_) {},
           appLoaded: (_) {
-            context.router.replace(const HabitsPageRoute());
+            context.router.replace(const HabitsOverviewPageRoute());
           },
         );
       },
