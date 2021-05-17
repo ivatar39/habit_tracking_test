@@ -30,6 +30,7 @@ class HabitsOverviewBody extends StatelessWidget {
                       final habit = state.habits[index];
                       return HabitCardWidget(
                         habit: habit,
+                        key: Key(habit.id.getOrCrash()),
                       );
                     },
                   ),

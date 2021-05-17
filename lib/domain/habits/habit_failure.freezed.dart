@@ -46,7 +46,6 @@ mixin _$HabitFailure {
     required TResult Function() noInternetConnection,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
@@ -56,7 +55,6 @@ mixin _$HabitFailure {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
@@ -66,7 +64,6 @@ mixin _$HabitFailure {
     required TResult Function(_NoInternetConnection value) noInternetConnection,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
@@ -90,7 +87,6 @@ class _$HabitFailureCopyWithImpl<$Res> implements $HabitFailureCopyWith<$Res> {
   _$HabitFailureCopyWithImpl(this._value, this._then);
 
   final HabitFailure _value;
-
   // ignore: unused_field
   final $Res Function(HabitFailure) _then;
 }

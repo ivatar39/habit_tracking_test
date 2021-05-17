@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
@@ -7,10 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracking_test/domain/habits/habit.dart';
 import 'package:habit_tracking_test/domain/habits/habit_failure.dart';
 import 'package:habit_tracking_test/domain/habits/i_habit_repository.dart';
-import 'package:habit_tracking_test/domain/habits/value_objects.dart' as h;
+import 'package:habit_tracking_test/domain/habits/value_objects.dart';
 import 'package:habit_tracking_test/infrastructure/habits/habit_dto.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:rxdart/rxdart.dart';
+
+/// All API cals are blocked, because PUT-requests returned 405 http-error
+/// Doing things locally for now.
 
 @LazySingleton(as: IHabitRepository)
 class HabitRepository implements IHabitRepository {
@@ -25,6 +31,15 @@ class HabitRepository implements IHabitRepository {
   @override
   Future<Either<HabitFailure, Unit>> create(Habit habit) async {
     debugPrint('Create $habit');
+
+    try {
+      final HabitDto dto = HabitDto.fromDomain(habit);
+      await Hive.box<HabitDto>('habits').put(dto.uid, dto);
+      return right(unit);
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return left(const HabitFailure.unexpected());
+    }
     if (await _connectivity.checkConnectivity() != ConnectivityResult.none) {
       final HabitDto habitDto = HabitDto.fromDomain(habit);
       try {
@@ -49,6 +64,14 @@ class HabitRepository implements IHabitRepository {
   @override
   Future<Either<HabitFailure, Unit>> update(Habit habit) async {
     debugPrint('Update $habit');
+    try {
+      final HabitDto dto = HabitDto.fromDomain(habit);
+      await Hive.box<HabitDto>('habits').put(dto.uid, dto);
+      return right(unit);
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return left(const HabitFailure.unexpected());
+    }
     if (await _connectivity.checkConnectivity() != ConnectivityResult.none) {
       final HabitDto habitDto = HabitDto.fromDomain(habit);
       try {
@@ -69,6 +92,14 @@ class HabitRepository implements IHabitRepository {
   @override
   Future<Either<HabitFailure, Unit>> delete(Habit habit) async {
     debugPrint('Delete $habit');
+    try {
+      final HabitDto dto = HabitDto.fromDomain(habit);
+      await Hive.box<HabitDto>('habits').delete(dto.uid);
+      return right(unit);
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return left(const HabitFailure.unexpected());
+    }
     if (await _connectivity.checkConnectivity() != ConnectivityResult.none) {
       final HabitDto habitDto = HabitDto.fromDomain(habit);
       try {
@@ -87,57 +118,96 @@ class HabitRepository implements IHabitRepository {
   }
 
   @override
-  Future<Either<HabitFailure, KtList<Habit>>> getBad() async {
+  Stream<Either<HabitFailure, KtList<Habit>>> watchBad() async* {
     debugPrint('Get bad');
-    if (await _connectivity.checkConnectivity() != ConnectivityResult.none) {
-      final failureOrAll = await getAll();
-      return failureOrAll.fold(
-        (failure) => left(failure),
-        (allHabits) =>
-            right(allHabits.filter((habit) => habit.type == h.Type.bad())),
-      );
-    } else {
-      return left(const HabitFailure.noInternetConnection());
-    }
+    final habitDtoBox = await Hive.openBox<HabitDto>('habits');
+
+    final Stream<BoxEvent> stream =
+        habitDtoBox.watch().startWith(BoxEvent(null, null, false));
+
+    yield* stream.map((event) => right(habitDtoBox.values
+        .map((habitDto) => habitDto.toDomain())
+        .toImmutableList()
+        .filter((habit) => habit.type == Type.bad())));
   }
 
   @override
-  Future<Either<HabitFailure, KtList<Habit>>> getGood() async {
+  Stream<Either<HabitFailure, KtList<Habit>>> watchGood() async* {
     debugPrint('Get good');
-    if (await _connectivity.checkConnectivity() != ConnectivityResult.none) {
-      final failureOrAll = await getAll();
-      return failureOrAll.fold(
-        (failure) => left(failure),
-        (allHabits) =>
-            right(allHabits.filter((habit) => habit.type == h.Type.good())),
+    final habitDtoBox = await Hive.openBox<HabitDto>('habits');
+
+    final Stream stream =
+        habitDtoBox.watch().startWith(BoxEvent(null, null, false));
+
+    yield* stream.map((event) => right(habitDtoBox.values
+        .map((habitDto) => habitDto.toDomain())
+        .toImmutableList()
+        .filter((habit) => habit.type == Type.good())));
+  }
+
+  @override
+  Future<Either<HabitFailure, String>> complete(Habit habit) async {
+    debugPrint('Complete $habit');
+    try {
+      final datesList = habit.datesList;
+      datesList.getOrCrash().toMutableList().add(DateTime.now());
+      final completedHabit = habit.copyWith(
+        count: Count((habit.count.number + 1).toString()),
+        datesList: datesList,
       );
-    } else {
-      return left(const HabitFailure.noInternetConnection());
+
+      final HabitDto dto = HabitDto.fromDomain(completedHabit);
+      await Hive.box<HabitDto>('habits').put(dto.uid, dto);
+
+      return right(getMotivationalBark(completedHabit));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return left(const HabitFailure.unexpected());
     }
   }
 
-  Future<Either<HabitFailure, KtList<Habit>>> getAll() async {
-    try {
-      final result = await _dio.get('/habit');
-      debugPrint(result.statusMessage);
-      if (result.data != null) {
-        final List data = result.data as List<dynamic>;
+  String getMotivationalBark(Habit habit) {
+    const List<String> kGoodBarksLowFrequency = [
+      'You can do it!',
+      'Believe in yourself!',
+      'Go on!',
+      'Proceed!'
+    ];
+    const List<String> kGoodBarksHighFrequency = [
+      'You are breathtaking!',
+      'Amazing!',
+      'Wow!',
+      'So cool!'
+    ];
+    const List<String> kBadBarksLowFrequency = [
+      'Try not to do that again.',
+      'Maybe it is not the best decision.',
+      'Please, stop.',
+      'Last time, ok?'
+    ];
+    const List<String> kBadBarksHighFrequency = [
+      'Oh, no...',
+      'Stop!',
+      'Why do you keep doing this?',
+      'Why?'
+    ];
 
-        final List<Map<String, dynamic>> mappedData = [];
-        for (final element in data) {
-          mappedData.add(element as Map<String, dynamic>);
-        }
-
-        final KtList<Habit> habits = KtList.from(mappedData.map((e) {
-          return HabitDto.fromJson(e).toDomain();
-        }));
-        return right(habits);
+    if (habit.type == Type.good()) {
+      if (habit.count.number >= habit.frequency.number) {
+        return kGoodBarksHighFrequency[
+            Random().nextInt(kGoodBarksHighFrequency.length)];
       } else {
-        return right(const KtList.empty());
+        return kGoodBarksLowFrequency[
+            Random().nextInt(kGoodBarksLowFrequency.length)];
       }
-    } on DioError catch (e) {
-      debugPrint(e.error.toString());
-      return left(const HabitFailure.unexpected());
+    } else {
+      if (habit.count.number >= habit.frequency.number) {
+        return kBadBarksHighFrequency[
+            Random().nextInt(kBadBarksHighFrequency.length)];
+      } else {
+        return kBadBarksLowFrequency[
+            Random().nextInt(kBadBarksLowFrequency.length)];
+      }
     }
   }
 }

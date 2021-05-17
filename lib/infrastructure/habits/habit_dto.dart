@@ -1,26 +1,27 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:habit_tracking_test/domain/habits/habit.dart';
 import 'package:habit_tracking_test/domain/habits/value_objects.dart';
+import 'package:hive/hive.dart';
 import 'package:kt_dart/collection.dart';
 
 part 'habit_dto.freezed.dart';
-
 part 'habit_dto.g.dart';
 
+@HiveType(typeId: 0)
 @freezed
 class HabitDto with _$HabitDto {
   const HabitDto._();
 
   const factory HabitDto({
-    required String title,
-    required int count,
-    required int date,
-    required String description,
-    @JsonKey(name: 'done_dates') List<int>? doneDates,
-    required int frequency,
-    required int priority,
-    required int type,
-    required String uid,
+    @HiveField(0) required String title,
+    @HiveField(1) required int count,
+    @HiveField(2) required int date,
+    @HiveField(3) required String description,
+    @HiveField(4) @JsonKey(name: 'done_dates') required List<int>? doneDates,
+    @HiveField(5) required int frequency,
+    @HiveField(6) required int priority,
+    @HiveField(7) required int type,
+    @HiveField(8) required String uid,
   }) = _HabitDto;
 
   factory HabitDto.fromDomain(Habit habit) {
@@ -32,7 +33,7 @@ class HabitDto with _$HabitDto {
       frequency: habit.frequency.number,
       type: Type.predefinedTypes.indexOf(habit.type.getOrCrash()),
       priority:
-          Priority.predefinedPriorities.indexOf(habit.priority.getOrCrash()),
+      Priority.predefinedPriorities.indexOf(habit.priority.getOrCrash()),
       description: habit.description.getOrCrash(),
       doneDates: habit.datesList
           .getOrCrash()

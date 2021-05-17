@@ -143,13 +143,17 @@ class HabitFormPageScaffold extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
-                children: const [
-                  NameField(),
-                  DescriptionField(),
-                  PriorityField(),
-                  TypeField(),
-                  CountField(),
-                  FrequencyField(),
+                children: [
+                  const NameField(),
+                  const DescriptionField(),
+                  const PriorityField(),
+                  const TypeField(),
+                  Row(
+                    children: const [
+                      Flexible(child: CountField()),
+                      Flexible(child: FrequencyField()),
+                    ],
+                  ),
                 ],
               ),
             ),
