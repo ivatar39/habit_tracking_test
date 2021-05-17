@@ -14,5 +14,4 @@ For now, I did not manage to make PUT-request to API (got error 405), so this ap
 but GET-request can be made, nevertheless.
 
 ## Diagram
-## Architecture
 ![architecture](https://resocoder.com/wp-content/uploads/2020/03/DDD-Flutter-Diagram-v3.svg)
