@@ -11,4 +11,6 @@ class HabitFailure with _$HabitFailure {
   const factory HabitFailure.unableToUpdate() = _UnableToUpdate;
 
   const factory HabitFailure.noInternetConnection() = _NoInternetConnection;
+
+  const factory HabitFailure.serverError(String code) = _ServerError;
 }

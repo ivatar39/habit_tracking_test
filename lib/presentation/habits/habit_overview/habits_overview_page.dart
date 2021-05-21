@@ -8,7 +8,7 @@ import 'package:habit_tracking_test/presentation/habits/habit_overview/widgets/h
 import 'package:habit_tracking_test/presentation/injection.dart';
 import 'package:habit_tracking_test/presentation/router/app_router.gr.dart';
 
-import 'widgets/habits_overview_bottom_sheet.dart';
+import 'widgets/habits_overview_bottom_bar.dart';
 import 'widgets/habits_tab_bar.dart';
 
 class HabitsOverviewPage extends StatelessWidget {
@@ -17,9 +17,10 @@ class HabitsOverviewPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (_) => getIt<HabitWatcherBloc>()
-              ..add(const HabitWatcherEvent.getGood())),
-        BlocProvider(create: (_) => getIt<HabitActorBloc>()),
+            create: (context) => getIt<HabitWatcherBloc>()
+              ..add(const HabitWatcherEvent.getInitial())
+              ..add(const HabitWatcherEvent.watchGood())),
+        BlocProvider(create: (context) => getIt<HabitActorBloc>()),
       ],
       child: BlocListener<HabitActorBloc, HabitActorState>(
         listener: (context, state) {
@@ -28,12 +29,14 @@ class HabitsOverviewPage extends StatelessWidget {
                 FlushbarHelper.createError(
                   duration: const Duration(seconds: 5),
                   message: state.habitFailure.map(
-                      unexpected: (_) =>
-                          'Unexpected error occurred while deleting, please contact support.',
-                      insufficientPermission: (_) =>
-                          'Insufficient permissions ❌',
-                      unableToUpdate: (_) => 'Impossible error',
-                      noInternetConnection: (_) => 'No internet connection'),
+                    unexpected: (_) =>
+                        'Unexpected error occurred while deleting, please contact support.',
+                    insufficientPermission: (_) => 'Insufficient permissions ❌',
+                    unableToUpdate: (_) => 'Impossible error',
+                    noInternetConnection: (_) => 'No internet connection',
+                    serverError: (code) =>
+                        'Some error has occurred on server. Here is some info: $code',
+                  ),
                 ).show(context);
               },
               completeSuccess: (state) {
@@ -53,13 +56,16 @@ class HabitsOverviewPage extends StatelessWidget {
             bottom: HabitsTabBar(),
           ),
           body: HabitsOverviewBody(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
+            tooltip: 'Create new habit',
             onPressed: () {
               context.router.push(HabitFormPageRoute(editedHabit: null));
             },
             child: const Icon(Icons.add),
           ),
-          bottomSheet: HabitsOverviewBottomSheet(),
+          bottomNavigationBar: HabitsOverviewBottomBar(),
         ),
       ),
     );

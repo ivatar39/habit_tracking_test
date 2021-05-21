@@ -55,34 +55,25 @@ const $HabitDto = _$HabitDtoTearOff();
 mixin _$HabitDto {
   @HiveField(0)
   String get title => throw _privateConstructorUsedError;
-
   @HiveField(1)
   int get count => throw _privateConstructorUsedError;
-
   @HiveField(2)
   int get date => throw _privateConstructorUsedError;
-
   @HiveField(3)
   String get description => throw _privateConstructorUsedError;
-
   @HiveField(4)
   @JsonKey(name: 'done_dates')
   List<int>? get doneDates => throw _privateConstructorUsedError;
-
   @HiveField(5)
   int get frequency => throw _privateConstructorUsedError;
-
   @HiveField(6)
   int get priority => throw _privateConstructorUsedError;
-
   @HiveField(7)
   int get type => throw _privateConstructorUsedError;
-
   @HiveField(8)
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $HabitDtoCopyWith<HabitDto> get copyWith =>
       throw _privateConstructorUsedError;
@@ -92,7 +83,6 @@ mixin _$HabitDto {
 abstract class $HabitDtoCopyWith<$Res> {
   factory $HabitDtoCopyWith(HabitDto value, $Res Function(HabitDto) then) =
       _$HabitDtoCopyWithImpl<$Res>;
-
   $Res call(
       {@HiveField(0) String title,
       @HiveField(1) int count,
@@ -170,7 +160,6 @@ class _$HabitDtoCopyWithImpl<$Res> implements $HabitDtoCopyWith<$Res> {
 abstract class _$HabitDtoCopyWith<$Res> implements $HabitDtoCopyWith<$Res> {
   factory _$HabitDtoCopyWith(_HabitDto value, $Res Function(_HabitDto) then) =
       __$HabitDtoCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@HiveField(0) String title,
@@ -368,36 +357,28 @@ abstract class _HabitDto extends HabitDto {
   @override
   @HiveField(0)
   String get title => throw _privateConstructorUsedError;
-
   @override
   @HiveField(1)
   int get count => throw _privateConstructorUsedError;
-
   @override
   @HiveField(2)
   int get date => throw _privateConstructorUsedError;
-
   @override
   @HiveField(3)
   String get description => throw _privateConstructorUsedError;
-
   @override
   @HiveField(4)
   @JsonKey(name: 'done_dates')
   List<int>? get doneDates => throw _privateConstructorUsedError;
-
   @override
   @HiveField(5)
   int get frequency => throw _privateConstructorUsedError;
-
   @override
   @HiveField(6)
   int get priority => throw _privateConstructorUsedError;
-
   @override
   @HiveField(7)
   int get type => throw _privateConstructorUsedError;
-
   @override
   @HiveField(8)
   String get uid => throw _privateConstructorUsedError;

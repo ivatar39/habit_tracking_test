@@ -42,7 +42,6 @@ mixin _$HabitActorEvent {
     required TResult Function(Habit habit) completed,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Habit habit)? deleted,
@@ -50,14 +49,12 @@ mixin _$HabitActorEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Completed value) completed,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Deleted value)? deleted,
@@ -76,7 +73,6 @@ abstract class $HabitActorEventCopyWith<$Res> {
   factory $HabitActorEventCopyWith(
           HabitActorEvent value, $Res Function(HabitActorEvent) then) =
       _$HabitActorEventCopyWithImpl<$Res>;
-
   $Res call({Habit habit});
 
   $HabitCopyWith<$Res> get habit;
@@ -88,7 +84,6 @@ class _$HabitActorEventCopyWithImpl<$Res>
   _$HabitActorEventCopyWithImpl(this._value, this._then);
 
   final HabitActorEvent _value;
-
   // ignore: unused_field
   final $Res Function(HabitActorEvent) _then;
 
@@ -117,7 +112,6 @@ abstract class _$DeletedCopyWith<$Res>
     implements $HabitActorEventCopyWith<$Res> {
   factory _$DeletedCopyWith(_Deleted value, $Res Function(_Deleted) then) =
       __$DeletedCopyWithImpl<$Res>;
-
   @override
   $Res call({Habit habit});
 
@@ -227,7 +221,6 @@ abstract class _Deleted implements HabitActorEvent {
 
   @override
   Habit get habit => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$DeletedCopyWith<_Deleted> get copyWith =>
@@ -240,7 +233,6 @@ abstract class _$CompletedCopyWith<$Res>
   factory _$CompletedCopyWith(
           _Completed value, $Res Function(_Completed) then) =
       __$CompletedCopyWithImpl<$Res>;
-
   @override
   $Res call({Habit habit});
 
@@ -350,7 +342,6 @@ abstract class _Completed implements HabitActorEvent {
 
   @override
   Habit get habit => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$CompletedCopyWith<_Completed> get copyWith =>
@@ -410,7 +401,6 @@ mixin _$HabitActorState {
         completeSuccess,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -422,7 +412,6 @@ mixin _$HabitActorState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
@@ -433,7 +422,6 @@ mixin _$HabitActorState {
     required TResult Function(_CompleteSuccess value) completeSuccess,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -460,7 +448,6 @@ class _$HabitActorStateCopyWithImpl<$Res>
   _$HabitActorStateCopyWithImpl(this._value, this._then);
 
   final HabitActorState _value;
-
   // ignore: unused_field
   final $Res Function(HabitActorState) _then;
 }
@@ -673,7 +660,6 @@ abstract class _$DeleteFailureCopyWith<$Res> {
   factory _$DeleteFailureCopyWith(
           _DeleteFailure value, $Res Function(_DeleteFailure) then) =
       __$DeleteFailureCopyWithImpl<$Res>;
-
   $Res call({HabitFailure habitFailure});
 
   $HabitFailureCopyWith<$Res> get habitFailure;
@@ -807,7 +793,6 @@ abstract class _DeleteFailure implements HabitActorState {
   const factory _DeleteFailure(HabitFailure habitFailure) = _$_DeleteFailure;
 
   HabitFailure get habitFailure => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$DeleteFailureCopyWith<_DeleteFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -921,7 +906,6 @@ abstract class _$CompleteFailureCopyWith<$Res> {
   factory _$CompleteFailureCopyWith(
           _CompleteFailure value, $Res Function(_CompleteFailure) then) =
       __$CompleteFailureCopyWithImpl<$Res>;
-
   $Res call({HabitFailure habitFailure});
 
   $HabitFailureCopyWith<$Res> get habitFailure;
@@ -1056,7 +1040,6 @@ abstract class _CompleteFailure implements HabitActorState {
       _$_CompleteFailure;
 
   HabitFailure get habitFailure => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$CompleteFailureCopyWith<_CompleteFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1067,7 +1050,6 @@ abstract class _$CompleteSuccessCopyWith<$Res> {
   factory _$CompleteSuccessCopyWith(
           _CompleteSuccess value, $Res Function(_CompleteSuccess) then) =
       __$CompleteSuccessCopyWithImpl<$Res>;
-
   $Res call({bool isGood, String completionBark});
 }
 
@@ -1206,9 +1188,7 @@ abstract class _CompleteSuccess implements HabitActorState {
       required String completionBark}) = _$_CompleteSuccess;
 
   bool get isGood => throw _privateConstructorUsedError;
-
   String get completionBark => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$CompleteSuccessCopyWith<_CompleteSuccess> get copyWith =>
       throw _privateConstructorUsedError;

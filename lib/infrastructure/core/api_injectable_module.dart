@@ -14,7 +14,7 @@ abstract class ApiInjectableModule {
       connectTimeout: 5000,
       receiveTimeout: 3000,
       headers: {
-        'Authorization': kApiToken,
+        'Authorization': kApiToken, // Use your own token if you have one
         'accept': 'application/json',
       },
     ),

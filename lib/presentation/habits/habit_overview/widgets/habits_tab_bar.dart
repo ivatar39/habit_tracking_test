@@ -20,12 +20,12 @@ class HabitsTabBar extends HookWidget implements PreferredSizeWidget {
         case 0:
           context
               .read<HabitWatcherBloc>()
-              .add(const HabitWatcherEvent.getGood());
+              .add(const HabitWatcherEvent.watchGood());
           break;
         case 1:
           context
               .read<HabitWatcherBloc>()
-              .add(const HabitWatcherEvent.getBad());
+              .add(const HabitWatcherEvent.watchBad());
           break;
       }
     });

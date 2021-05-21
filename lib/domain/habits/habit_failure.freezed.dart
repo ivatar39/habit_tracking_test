@@ -31,6 +31,12 @@ class _$HabitFailureTearOff {
   _NoInternetConnection noInternetConnection() {
     return const _NoInternetConnection();
   }
+
+  _ServerError serverError(String code) {
+    return _ServerError(
+      code,
+    );
+  }
 }
 
 /// @nodoc
@@ -44,6 +50,7 @@ mixin _$HabitFailure {
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
     required TResult Function() noInternetConnection,
+    required TResult Function(String code) serverError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +59,7 @@ mixin _$HabitFailure {
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     TResult Function()? noInternetConnection,
+    TResult Function(String code)? serverError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +70,7 @@ mixin _$HabitFailure {
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_ServerError value) serverError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +79,7 @@ mixin _$HabitFailure {
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_ServerError value)? serverError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +144,7 @@ class _$_Unexpected implements _Unexpected {
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
     required TResult Function() noInternetConnection,
+    required TResult Function(String code) serverError,
   }) {
     return unexpected();
   }
@@ -145,6 +156,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     TResult Function()? noInternetConnection,
+    TResult Function(String code)? serverError,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -161,6 +173,7 @@ class _$_Unexpected implements _Unexpected {
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_ServerError value) serverError,
   }) {
     return unexpected(this);
   }
@@ -172,6 +185,7 @@ class _$_Unexpected implements _Unexpected {
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_ServerError value)? serverError,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -229,6 +243,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
     required TResult Function() noInternetConnection,
+    required TResult Function(String code) serverError,
   }) {
     return insufficientPermission();
   }
@@ -240,6 +255,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     TResult Function()? noInternetConnection,
+    TResult Function(String code)? serverError,
     required TResult orElse(),
   }) {
     if (insufficientPermission != null) {
@@ -256,6 +272,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_ServerError value) serverError,
   }) {
     return insufficientPermission(this);
   }
@@ -267,6 +284,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_ServerError value)? serverError,
     required TResult orElse(),
   }) {
     if (insufficientPermission != null) {
@@ -324,6 +342,7 @@ class _$_UnableToUpdate implements _UnableToUpdate {
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
     required TResult Function() noInternetConnection,
+    required TResult Function(String code) serverError,
   }) {
     return unableToUpdate();
   }
@@ -335,6 +354,7 @@ class _$_UnableToUpdate implements _UnableToUpdate {
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     TResult Function()? noInternetConnection,
+    TResult Function(String code)? serverError,
     required TResult orElse(),
   }) {
     if (unableToUpdate != null) {
@@ -351,6 +371,7 @@ class _$_UnableToUpdate implements _UnableToUpdate {
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_ServerError value) serverError,
   }) {
     return unableToUpdate(this);
   }
@@ -362,6 +383,7 @@ class _$_UnableToUpdate implements _UnableToUpdate {
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_ServerError value)? serverError,
     required TResult orElse(),
   }) {
     if (unableToUpdate != null) {
@@ -419,6 +441,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
     required TResult Function() noInternetConnection,
+    required TResult Function(String code) serverError,
   }) {
     return noInternetConnection();
   }
@@ -430,6 +453,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     TResult Function()? noInternetConnection,
+    TResult Function(String code)? serverError,
     required TResult orElse(),
   }) {
     if (noInternetConnection != null) {
@@ -446,6 +470,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_ServerError value) serverError,
   }) {
     return noInternetConnection(this);
   }
@@ -457,6 +482,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_ServerError value)? serverError,
     required TResult orElse(),
   }) {
     if (noInternetConnection != null) {
@@ -468,4 +494,134 @@ class _$_NoInternetConnection implements _NoInternetConnection {
 
 abstract class _NoInternetConnection implements HabitFailure {
   const factory _NoInternetConnection() = _$_NoInternetConnection;
+}
+
+/// @nodoc
+abstract class _$ServerErrorCopyWith<$Res> {
+  factory _$ServerErrorCopyWith(
+          _ServerError value, $Res Function(_ServerError) then) =
+      __$ServerErrorCopyWithImpl<$Res>;
+
+  $Res call({String code});
+}
+
+/// @nodoc
+class __$ServerErrorCopyWithImpl<$Res> extends _$HabitFailureCopyWithImpl<$Res>
+    implements _$ServerErrorCopyWith<$Res> {
+  __$ServerErrorCopyWithImpl(
+      _ServerError _value, $Res Function(_ServerError) _then)
+      : super(_value, (v) => _then(v as _ServerError));
+
+  @override
+  _ServerError get _value => super._value as _ServerError;
+
+  @override
+  $Res call({
+    Object? code = freezed,
+  }) {
+    return _then(_ServerError(
+      code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ServerError implements _ServerError {
+  const _$_ServerError(this.code);
+
+  @override
+  final String code;
+
+  @override
+  String toString() {
+    return 'HabitFailure.serverError(code: $code)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ServerError &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(code);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ServerErrorCopyWith<_ServerError> get copyWith =>
+      __$ServerErrorCopyWithImpl<_ServerError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function() insufficientPermission,
+    required TResult Function() unableToUpdate,
+    required TResult Function() noInternetConnection,
+    required TResult Function(String code) serverError,
+  }) {
+    return serverError(code);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? insufficientPermission,
+    TResult Function()? unableToUpdate,
+    TResult Function()? noInternetConnection,
+    TResult Function(String code)? serverError,
+    required TResult orElse(),
+  }) {
+    if (serverError != null) {
+      return serverError(code);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_InsufficientPermission value)
+        insufficientPermission,
+    required TResult Function(_UnableToUpdate value) unableToUpdate,
+    required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_ServerError value) serverError,
+  }) {
+    return serverError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_InsufficientPermission value)? insufficientPermission,
+    TResult Function(_UnableToUpdate value)? unableToUpdate,
+    TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_ServerError value)? serverError,
+    required TResult orElse(),
+  }) {
+    if (serverError != null) {
+      return serverError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ServerError implements HabitFailure {
+  const factory _ServerError(String code) = _$_ServerError;
+
+  String get code => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  _$ServerErrorCopyWith<_ServerError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

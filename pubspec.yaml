@@ -35,7 +35,7 @@ dependencies:
   # Tools and Network
   uuid: ^3.0.4
   dio: ^4.0.0
-  connectivity: ^3.0.3
+  connectivity: ^3.0.4
 
   # Local database
   hive: ^2.0.4

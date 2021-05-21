@@ -27,17 +27,33 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
   @override
   Stream<HabitWatcherState> mapEventToState(HabitWatcherEvent event) async* {
     yield* event.map(
-      getBad: (e) async* {
+      getInitial: (e) async* {
+        yield const HabitWatcherState.loadInProgress();
+        final failureOrHabits = await _repository.read();
+        yield failureOrHabits.fold(
+          (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
+          (habits) => HabitWatcherState.loadSuccess(habits),
+        );
+      },
+      watchBad: (e) async* {
         yield const HabitWatcherState.loadInProgress();
         _habitStreamSubscription = _repository.watchBad().listen(
             (failureOrHabits) =>
                 add(HabitWatcherEvent.habitsReceived(failureOrHabits)));
       },
-      getGood: (e) async* {
+      watchGood: (e) async* {
         yield const HabitWatcherState.loadInProgress();
         _habitStreamSubscription = _repository.watchGood().listen(
             (failureOrHabits) =>
                 add(HabitWatcherEvent.habitsReceived(failureOrHabits)));
+      },
+      sortByDate: (e) async* {
+        yield const HabitWatcherState.loadInProgress();
+        final failureOrSorted = await _repository.sortByDate();
+        yield failureOrSorted.fold(
+          (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
+          (habits) => HabitWatcherState.loadSuccess(habits),
+        );
       },
       habitsReceived: (e) async* {
         yield e.failureOrHabits.fold(

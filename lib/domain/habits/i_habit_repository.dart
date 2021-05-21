@@ -8,7 +8,11 @@ abstract class IHabitRepository {
 
   Stream<Either<HabitFailure, KtList<Habit>>> watchBad();
 
+  Future<Either<HabitFailure, KtList<Habit>>> sortByDate();
+
   Future<Either<HabitFailure, Unit>> create(Habit habit);
+
+  Future<Either<HabitFailure, KtList<Habit>>> read();
 
   Future<Either<HabitFailure, Unit>> update(Habit habit);
 

@@ -16,12 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HabitWatcherEventTearOff {
   const _$HabitWatcherEventTearOff();
 
-  _GetBad getBad() {
+  _GetInitial getInitial() {
+    return const _GetInitial();
+  }
+
+  _GetBad watchBad() {
     return const _GetBad();
   }
 
-  _GetGood getGood() {
+  _GetGood watchGood() {
     return const _GetGood();
+  }
+
+  _SortByDate sortByDate() {
+    return const _SortByDate();
   }
 
   _HabitsReceived habitsReceived(
@@ -39,8 +47,10 @@ const $HabitWatcherEvent = _$HabitWatcherEventTearOff();
 mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getBad,
-    required TResult Function() getGood,
+    required TResult Function() getInitial,
+    required TResult Function() watchBad,
+    required TResult Function() watchGood,
+    required TResult Function() sortByDate,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
@@ -48,8 +58,10 @@ mixin _$HabitWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getBad,
-    TResult Function()? getGood,
+    TResult Function()? getInitial,
+    TResult Function()? watchBad,
+    TResult Function()? watchGood,
+    TResult Function()? sortByDate,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
@@ -57,15 +69,19 @@ mixin _$HabitWatcherEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetBad value) getBad,
-    required TResult Function(_GetGood value) getGood,
+    required TResult Function(_GetInitial value) getInitial,
+    required TResult Function(_GetBad value) watchBad,
+    required TResult Function(_GetGood value) watchGood,
+    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetBad value)? getBad,
-    TResult Function(_GetGood value)? getGood,
+    TResult Function(_GetInitial value)? getInitial,
+    TResult Function(_GetBad value)? watchBad,
+    TResult Function(_GetGood value)? watchGood,
+    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) =>
@@ -85,8 +101,110 @@ class _$HabitWatcherEventCopyWithImpl<$Res>
   _$HabitWatcherEventCopyWithImpl(this._value, this._then);
 
   final HabitWatcherEvent _value;
+
   // ignore: unused_field
   final $Res Function(HabitWatcherEvent) _then;
+}
+
+/// @nodoc
+abstract class _$GetInitialCopyWith<$Res> {
+  factory _$GetInitialCopyWith(
+          _GetInitial value, $Res Function(_GetInitial) then) =
+      __$GetInitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GetInitialCopyWithImpl<$Res>
+    extends _$HabitWatcherEventCopyWithImpl<$Res>
+    implements _$GetInitialCopyWith<$Res> {
+  __$GetInitialCopyWithImpl(
+      _GetInitial _value, $Res Function(_GetInitial) _then)
+      : super(_value, (v) => _then(v as _GetInitial));
+
+  @override
+  _GetInitial get _value => super._value as _GetInitial;
+}
+
+/// @nodoc
+
+class _$_GetInitial implements _GetInitial {
+  const _$_GetInitial();
+
+  @override
+  String toString() {
+    return 'HabitWatcherEvent.getInitial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _GetInitial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getInitial,
+    required TResult Function() watchBad,
+    required TResult Function() watchGood,
+    required TResult Function() sortByDate,
+    required TResult Function(
+            Either<HabitFailure, KtList<Habit>> failureOrHabits)
+        habitsReceived,
+  }) {
+    return getInitial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getInitial,
+    TResult Function()? watchBad,
+    TResult Function()? watchGood,
+    TResult Function()? sortByDate,
+    TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
+        habitsReceived,
+    required TResult orElse(),
+  }) {
+    if (getInitial != null) {
+      return getInitial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetInitial value) getInitial,
+    required TResult Function(_GetBad value) watchBad,
+    required TResult Function(_GetGood value) watchGood,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_HabitsReceived value) habitsReceived,
+  }) {
+    return getInitial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetInitial value)? getInitial,
+    TResult Function(_GetBad value)? watchBad,
+    TResult Function(_GetGood value)? watchGood,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_HabitsReceived value)? habitsReceived,
+    required TResult orElse(),
+  }) {
+    if (getInitial != null) {
+      return getInitial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetInitial implements HabitWatcherEvent {
+  const factory _GetInitial() = _$_GetInitial;
 }
 
 /// @nodoc
@@ -112,7 +230,7 @@ class _$_GetBad implements _GetBad {
 
   @override
   String toString() {
-    return 'HabitWatcherEvent.getBad()';
+    return 'HabitWatcherEvent.watchBad()';
   }
 
   @override
@@ -126,26 +244,30 @@ class _$_GetBad implements _GetBad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getBad,
-    required TResult Function() getGood,
+    required TResult Function() getInitial,
+    required TResult Function() watchBad,
+    required TResult Function() watchGood,
+    required TResult Function() sortByDate,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
   }) {
-    return getBad();
+    return watchBad();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getBad,
-    TResult Function()? getGood,
+    TResult Function()? getInitial,
+    TResult Function()? watchBad,
+    TResult Function()? watchGood,
+    TResult Function()? sortByDate,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
   }) {
-    if (getBad != null) {
-      return getBad();
+    if (watchBad != null) {
+      return watchBad();
     }
     return orElse();
   }
@@ -153,23 +275,27 @@ class _$_GetBad implements _GetBad {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetBad value) getBad,
-    required TResult Function(_GetGood value) getGood,
+    required TResult Function(_GetInitial value) getInitial,
+    required TResult Function(_GetBad value) watchBad,
+    required TResult Function(_GetGood value) watchGood,
+    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
-    return getBad(this);
+    return watchBad(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetBad value)? getBad,
-    TResult Function(_GetGood value)? getGood,
+    TResult Function(_GetInitial value)? getInitial,
+    TResult Function(_GetBad value)? watchBad,
+    TResult Function(_GetGood value)? watchGood,
+    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {
-    if (getBad != null) {
-      return getBad(this);
+    if (watchBad != null) {
+      return watchBad(this);
     }
     return orElse();
   }
@@ -202,7 +328,7 @@ class _$_GetGood implements _GetGood {
 
   @override
   String toString() {
-    return 'HabitWatcherEvent.getGood()';
+    return 'HabitWatcherEvent.watchGood()';
   }
 
   @override
@@ -216,26 +342,30 @@ class _$_GetGood implements _GetGood {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getBad,
-    required TResult Function() getGood,
+    required TResult Function() getInitial,
+    required TResult Function() watchBad,
+    required TResult Function() watchGood,
+    required TResult Function() sortByDate,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
   }) {
-    return getGood();
+    return watchGood();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getBad,
-    TResult Function()? getGood,
+    TResult Function()? getInitial,
+    TResult Function()? watchBad,
+    TResult Function()? watchGood,
+    TResult Function()? sortByDate,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
   }) {
-    if (getGood != null) {
-      return getGood();
+    if (watchGood != null) {
+      return watchGood();
     }
     return orElse();
   }
@@ -243,23 +373,27 @@ class _$_GetGood implements _GetGood {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetBad value) getBad,
-    required TResult Function(_GetGood value) getGood,
+    required TResult Function(_GetInitial value) getInitial,
+    required TResult Function(_GetBad value) watchBad,
+    required TResult Function(_GetGood value) watchGood,
+    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
-    return getGood(this);
+    return watchGood(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetBad value)? getBad,
-    TResult Function(_GetGood value)? getGood,
+    TResult Function(_GetInitial value)? getInitial,
+    TResult Function(_GetBad value)? watchBad,
+    TResult Function(_GetGood value)? watchGood,
+    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {
-    if (getGood != null) {
-      return getGood(this);
+    if (watchGood != null) {
+      return watchGood(this);
     }
     return orElse();
   }
@@ -270,10 +404,112 @@ abstract class _GetGood implements HabitWatcherEvent {
 }
 
 /// @nodoc
+abstract class _$SortByDateCopyWith<$Res> {
+  factory _$SortByDateCopyWith(
+          _SortByDate value, $Res Function(_SortByDate) then) =
+      __$SortByDateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SortByDateCopyWithImpl<$Res>
+    extends _$HabitWatcherEventCopyWithImpl<$Res>
+    implements _$SortByDateCopyWith<$Res> {
+  __$SortByDateCopyWithImpl(
+      _SortByDate _value, $Res Function(_SortByDate) _then)
+      : super(_value, (v) => _then(v as _SortByDate));
+
+  @override
+  _SortByDate get _value => super._value as _SortByDate;
+}
+
+/// @nodoc
+
+class _$_SortByDate implements _SortByDate {
+  const _$_SortByDate();
+
+  @override
+  String toString() {
+    return 'HabitWatcherEvent.sortByDate()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _SortByDate);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getInitial,
+    required TResult Function() watchBad,
+    required TResult Function() watchGood,
+    required TResult Function() sortByDate,
+    required TResult Function(
+            Either<HabitFailure, KtList<Habit>> failureOrHabits)
+        habitsReceived,
+  }) {
+    return sortByDate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getInitial,
+    TResult Function()? watchBad,
+    TResult Function()? watchGood,
+    TResult Function()? sortByDate,
+    TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
+        habitsReceived,
+    required TResult orElse(),
+  }) {
+    if (sortByDate != null) {
+      return sortByDate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetInitial value) getInitial,
+    required TResult Function(_GetBad value) watchBad,
+    required TResult Function(_GetGood value) watchGood,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_HabitsReceived value) habitsReceived,
+  }) {
+    return sortByDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetInitial value)? getInitial,
+    TResult Function(_GetBad value)? watchBad,
+    TResult Function(_GetGood value)? watchGood,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_HabitsReceived value)? habitsReceived,
+    required TResult orElse(),
+  }) {
+    if (sortByDate != null) {
+      return sortByDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SortByDate implements HabitWatcherEvent {
+  const factory _SortByDate() = _$_SortByDate;
+}
+
+/// @nodoc
 abstract class _$HabitsReceivedCopyWith<$Res> {
   factory _$HabitsReceivedCopyWith(
           _HabitsReceived value, $Res Function(_HabitsReceived) then) =
       __$HabitsReceivedCopyWithImpl<$Res>;
+
   $Res call({Either<HabitFailure, KtList<Habit>> failureOrHabits});
 }
 
@@ -336,8 +572,10 @@ class _$_HabitsReceived implements _HabitsReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getBad,
-    required TResult Function() getGood,
+    required TResult Function() getInitial,
+    required TResult Function() watchBad,
+    required TResult Function() watchGood,
+    required TResult Function() sortByDate,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
@@ -348,8 +586,10 @@ class _$_HabitsReceived implements _HabitsReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getBad,
-    TResult Function()? getGood,
+    TResult Function()? getInitial,
+    TResult Function()? watchBad,
+    TResult Function()? watchGood,
+    TResult Function()? sortByDate,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
@@ -363,8 +603,10 @@ class _$_HabitsReceived implements _HabitsReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetBad value) getBad,
-    required TResult Function(_GetGood value) getGood,
+    required TResult Function(_GetInitial value) getInitial,
+    required TResult Function(_GetBad value) watchBad,
+    required TResult Function(_GetGood value) watchGood,
+    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
     return habitsReceived(this);
@@ -373,8 +615,10 @@ class _$_HabitsReceived implements _HabitsReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetBad value)? getBad,
-    TResult Function(_GetGood value)? getGood,
+    TResult Function(_GetInitial value)? getInitial,
+    TResult Function(_GetBad value)? watchBad,
+    TResult Function(_GetGood value)? watchGood,
+    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {

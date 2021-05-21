@@ -47,6 +47,8 @@ class HabitFormPage extends StatelessWidget {
                         'Check your internet connection. Maybe you are offline.',
                     unexpected: (_) =>
                         'Unexpected error occurred, please contact support.',
+                    serverError: (code) =>
+                        'Some error has occurred on server. Here is some info: $code',
                   )).show(context);
                 },
                 (_) {
