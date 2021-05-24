@@ -32,7 +32,7 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
         yield const HabitWatcherState.loadInProgress();
         final failureOrHabits = await _repository.read();
         yield failureOrHabits.fold(
-              (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
+          (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
           (habits) => HabitWatcherState.loadSuccess(habits, isTypeGood: true),
         );
       },
