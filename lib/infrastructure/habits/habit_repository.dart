@@ -156,13 +156,20 @@ class HabitRepository implements IHabitRepository {
   }
 
   @override
-  Stream<Either<HabitFailure, KtList<Habit>>> watchBad() async* {
-    debugPrint('Get bad');
+  Stream<Either<HabitFailure, KtList<Habit>>> watchBad(
+      {required bool isSortedByDate}) async* {
+    debugPrint('Get bad date: $isSortedByDate');
     final habitDtoBox = Hive.box<HabitDto>('habits');
 
     final Stream<BoxEvent> stream =
         habitDtoBox.watch().startWith(BoxEvent(null, null, false));
-
+    if (isSortedByDate) {
+      yield* stream.map((event) => right(habitDtoBox.values
+          .map((habitDto) => habitDto.toDomain())
+          .toImmutableList()
+          .filter((habit) => habit.type == Type.bad())
+          .sortedBy((a) => a.dateCreated)));
+    }
     yield* stream.map((event) => right(habitDtoBox.values
         .map((habitDto) => habitDto.toDomain())
         .toImmutableList()
@@ -170,13 +177,21 @@ class HabitRepository implements IHabitRepository {
   }
 
   @override
-  Stream<Either<HabitFailure, KtList<Habit>>> watchGood() async* {
-    debugPrint('Get good');
+  Stream<Either<HabitFailure, KtList<Habit>>> watchGood(
+      {required bool isSortedByDate}) async* {
+    debugPrint('Get good date: $isSortedByDate');
     final habitDtoBox = Hive.box<HabitDto>('habits');
 
     final Stream stream =
         habitDtoBox.watch().startWith(BoxEvent(null, null, false));
 
+    if (isSortedByDate) {
+      yield* stream.map((event) => right(habitDtoBox.values
+          .map((habitDto) => habitDto.toDomain())
+          .toImmutableList()
+          .filter((habit) => habit.type == Type.good())
+          .sortedBy((a) => a.dateCreated)));
+    }
     yield* stream.map((event) => right(habitDtoBox.values
         .map((habitDto) => habitDto.toDomain())
         .toImmutableList()

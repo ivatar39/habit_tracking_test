@@ -20,16 +20,16 @@ class _$HabitWatcherEventTearOff {
     return const _GetInitial();
   }
 
-  _GetBad watchBad() {
-    return const _GetBad();
+  _GetBad watchBad({required bool isSortedByDate}) {
+    return _GetBad(
+      isSortedByDate: isSortedByDate,
+    );
   }
 
-  _GetGood watchGood() {
-    return const _GetGood();
-  }
-
-  _SortByDate sortByDate() {
-    return const _SortByDate();
+  _GetGood watchGood({required bool isSortedByDate}) {
+    return _GetGood(
+      isSortedByDate: isSortedByDate,
+    );
   }
 
   _HabitsReceived habitsReceived(
@@ -48,9 +48,8 @@ mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInitial,
-    required TResult Function() watchBad,
-    required TResult Function() watchGood,
-    required TResult Function() sortByDate,
+    required TResult Function(bool isSortedByDate) watchBad,
+    required TResult Function(bool isSortedByDate) watchGood,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
@@ -59,9 +58,8 @@ mixin _$HabitWatcherEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInitial,
-    TResult Function()? watchBad,
-    TResult Function()? watchGood,
-    TResult Function()? sortByDate,
+    TResult Function(bool isSortedByDate)? watchBad,
+    TResult Function(bool isSortedByDate)? watchGood,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
@@ -72,7 +70,6 @@ mixin _$HabitWatcherEvent {
     required TResult Function(_GetInitial value) getInitial,
     required TResult Function(_GetBad value) watchBad,
     required TResult Function(_GetGood value) watchGood,
-    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -81,7 +78,6 @@ mixin _$HabitWatcherEvent {
     TResult Function(_GetInitial value)? getInitial,
     TResult Function(_GetBad value)? watchBad,
     TResult Function(_GetGood value)? watchGood,
-    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) =>
@@ -101,7 +97,6 @@ class _$HabitWatcherEventCopyWithImpl<$Res>
   _$HabitWatcherEventCopyWithImpl(this._value, this._then);
 
   final HabitWatcherEvent _value;
-
   // ignore: unused_field
   final $Res Function(HabitWatcherEvent) _then;
 }
@@ -147,9 +142,8 @@ class _$_GetInitial implements _GetInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInitial,
-    required TResult Function() watchBad,
-    required TResult Function() watchGood,
-    required TResult Function() sortByDate,
+    required TResult Function(bool isSortedByDate) watchBad,
+    required TResult Function(bool isSortedByDate) watchGood,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
@@ -161,9 +155,8 @@ class _$_GetInitial implements _GetInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInitial,
-    TResult Function()? watchBad,
-    TResult Function()? watchGood,
-    TResult Function()? sortByDate,
+    TResult Function(bool isSortedByDate)? watchBad,
+    TResult Function(bool isSortedByDate)? watchGood,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
@@ -180,7 +173,6 @@ class _$_GetInitial implements _GetInitial {
     required TResult Function(_GetInitial value) getInitial,
     required TResult Function(_GetBad value) watchBad,
     required TResult Function(_GetGood value) watchGood,
-    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
     return getInitial(this);
@@ -192,7 +184,6 @@ class _$_GetInitial implements _GetInitial {
     TResult Function(_GetInitial value)? getInitial,
     TResult Function(_GetBad value)? watchBad,
     TResult Function(_GetGood value)? watchGood,
-    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {
@@ -211,6 +202,8 @@ abstract class _GetInitial implements HabitWatcherEvent {
 abstract class _$GetBadCopyWith<$Res> {
   factory _$GetBadCopyWith(_GetBad value, $Res Function(_GetBad) then) =
       __$GetBadCopyWithImpl<$Res>;
+
+  $Res call({bool isSortedByDate});
 }
 
 /// @nodoc
@@ -221,53 +214,77 @@ class __$GetBadCopyWithImpl<$Res> extends _$HabitWatcherEventCopyWithImpl<$Res>
 
   @override
   _GetBad get _value => super._value as _GetBad;
+
+  @override
+  $Res call({
+    Object? isSortedByDate = freezed,
+  }) {
+    return _then(_GetBad(
+      isSortedByDate: isSortedByDate == freezed
+          ? _value.isSortedByDate
+          : isSortedByDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetBad implements _GetBad {
-  const _$_GetBad();
+  const _$_GetBad({required this.isSortedByDate});
+
+  @override
+  final bool isSortedByDate;
 
   @override
   String toString() {
-    return 'HabitWatcherEvent.watchBad()';
+    return 'HabitWatcherEvent.watchBad(isSortedByDate: $isSortedByDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _GetBad);
+    return identical(this, other) ||
+        (other is _GetBad &&
+            (identical(other.isSortedByDate, isSortedByDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSortedByDate, isSortedByDate)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isSortedByDate);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetBadCopyWith<_GetBad> get copyWith =>
+      __$GetBadCopyWithImpl<_GetBad>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInitial,
-    required TResult Function() watchBad,
-    required TResult Function() watchGood,
-    required TResult Function() sortByDate,
+    required TResult Function(bool isSortedByDate) watchBad,
+    required TResult Function(bool isSortedByDate) watchGood,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
   }) {
-    return watchBad();
+    return watchBad(isSortedByDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInitial,
-    TResult Function()? watchBad,
-    TResult Function()? watchGood,
-    TResult Function()? sortByDate,
+    TResult Function(bool isSortedByDate)? watchBad,
+    TResult Function(bool isSortedByDate)? watchGood,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
   }) {
     if (watchBad != null) {
-      return watchBad();
+      return watchBad(isSortedByDate);
     }
     return orElse();
   }
@@ -278,7 +295,6 @@ class _$_GetBad implements _GetBad {
     required TResult Function(_GetInitial value) getInitial,
     required TResult Function(_GetBad value) watchBad,
     required TResult Function(_GetGood value) watchGood,
-    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
     return watchBad(this);
@@ -290,7 +306,6 @@ class _$_GetBad implements _GetBad {
     TResult Function(_GetInitial value)? getInitial,
     TResult Function(_GetBad value)? watchBad,
     TResult Function(_GetGood value)? watchGood,
-    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {
@@ -302,13 +317,20 @@ class _$_GetBad implements _GetBad {
 }
 
 abstract class _GetBad implements HabitWatcherEvent {
-  const factory _GetBad() = _$_GetBad;
+  const factory _GetBad({required bool isSortedByDate}) = _$_GetBad;
+
+  bool get isSortedByDate => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  _$GetBadCopyWith<_GetBad> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$GetGoodCopyWith<$Res> {
   factory _$GetGoodCopyWith(_GetGood value, $Res Function(_GetGood) then) =
       __$GetGoodCopyWithImpl<$Res>;
+
+  $Res call({bool isSortedByDate});
 }
 
 /// @nodoc
@@ -319,53 +341,77 @@ class __$GetGoodCopyWithImpl<$Res> extends _$HabitWatcherEventCopyWithImpl<$Res>
 
   @override
   _GetGood get _value => super._value as _GetGood;
+
+  @override
+  $Res call({
+    Object? isSortedByDate = freezed,
+  }) {
+    return _then(_GetGood(
+      isSortedByDate: isSortedByDate == freezed
+          ? _value.isSortedByDate
+          : isSortedByDate // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetGood implements _GetGood {
-  const _$_GetGood();
+  const _$_GetGood({required this.isSortedByDate});
+
+  @override
+  final bool isSortedByDate;
 
   @override
   String toString() {
-    return 'HabitWatcherEvent.watchGood()';
+    return 'HabitWatcherEvent.watchGood(isSortedByDate: $isSortedByDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _GetGood);
+    return identical(this, other) ||
+        (other is _GetGood &&
+            (identical(other.isSortedByDate, isSortedByDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSortedByDate, isSortedByDate)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isSortedByDate);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetGoodCopyWith<_GetGood> get copyWith =>
+      __$GetGoodCopyWithImpl<_GetGood>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInitial,
-    required TResult Function() watchBad,
-    required TResult Function() watchGood,
-    required TResult Function() sortByDate,
+    required TResult Function(bool isSortedByDate) watchBad,
+    required TResult Function(bool isSortedByDate) watchGood,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
   }) {
-    return watchGood();
+    return watchGood(isSortedByDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInitial,
-    TResult Function()? watchBad,
-    TResult Function()? watchGood,
-    TResult Function()? sortByDate,
+    TResult Function(bool isSortedByDate)? watchBad,
+    TResult Function(bool isSortedByDate)? watchGood,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
   }) {
     if (watchGood != null) {
-      return watchGood();
+      return watchGood(isSortedByDate);
     }
     return orElse();
   }
@@ -376,7 +422,6 @@ class _$_GetGood implements _GetGood {
     required TResult Function(_GetInitial value) getInitial,
     required TResult Function(_GetBad value) watchBad,
     required TResult Function(_GetGood value) watchGood,
-    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
     return watchGood(this);
@@ -388,7 +433,6 @@ class _$_GetGood implements _GetGood {
     TResult Function(_GetInitial value)? getInitial,
     TResult Function(_GetBad value)? watchBad,
     TResult Function(_GetGood value)? watchGood,
-    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {
@@ -400,108 +444,13 @@ class _$_GetGood implements _GetGood {
 }
 
 abstract class _GetGood implements HabitWatcherEvent {
-  const factory _GetGood() = _$_GetGood;
-}
+  const factory _GetGood({required bool isSortedByDate}) = _$_GetGood;
 
-/// @nodoc
-abstract class _$SortByDateCopyWith<$Res> {
-  factory _$SortByDateCopyWith(
-          _SortByDate value, $Res Function(_SortByDate) then) =
-      __$SortByDateCopyWithImpl<$Res>;
-}
+  bool get isSortedByDate => throw _privateConstructorUsedError;
 
-/// @nodoc
-class __$SortByDateCopyWithImpl<$Res>
-    extends _$HabitWatcherEventCopyWithImpl<$Res>
-    implements _$SortByDateCopyWith<$Res> {
-  __$SortByDateCopyWithImpl(
-      _SortByDate _value, $Res Function(_SortByDate) _then)
-      : super(_value, (v) => _then(v as _SortByDate));
-
-  @override
-  _SortByDate get _value => super._value as _SortByDate;
-}
-
-/// @nodoc
-
-class _$_SortByDate implements _SortByDate {
-  const _$_SortByDate();
-
-  @override
-  String toString() {
-    return 'HabitWatcherEvent.sortByDate()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _SortByDate);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getInitial,
-    required TResult Function() watchBad,
-    required TResult Function() watchGood,
-    required TResult Function() sortByDate,
-    required TResult Function(
-            Either<HabitFailure, KtList<Habit>> failureOrHabits)
-        habitsReceived,
-  }) {
-    return sortByDate();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getInitial,
-    TResult Function()? watchBad,
-    TResult Function()? watchGood,
-    TResult Function()? sortByDate,
-    TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
-        habitsReceived,
-    required TResult orElse(),
-  }) {
-    if (sortByDate != null) {
-      return sortByDate();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetInitial value) getInitial,
-    required TResult Function(_GetBad value) watchBad,
-    required TResult Function(_GetGood value) watchGood,
-    required TResult Function(_SortByDate value) sortByDate,
-    required TResult Function(_HabitsReceived value) habitsReceived,
-  }) {
-    return sortByDate(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetInitial value)? getInitial,
-    TResult Function(_GetBad value)? watchBad,
-    TResult Function(_GetGood value)? watchGood,
-    TResult Function(_SortByDate value)? sortByDate,
-    TResult Function(_HabitsReceived value)? habitsReceived,
-    required TResult orElse(),
-  }) {
-    if (sortByDate != null) {
-      return sortByDate(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SortByDate implements HabitWatcherEvent {
-  const factory _SortByDate() = _$_SortByDate;
+  @JsonKey(ignore: true)
+  _$GetGoodCopyWith<_GetGood> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -509,7 +458,6 @@ abstract class _$HabitsReceivedCopyWith<$Res> {
   factory _$HabitsReceivedCopyWith(
           _HabitsReceived value, $Res Function(_HabitsReceived) then) =
       __$HabitsReceivedCopyWithImpl<$Res>;
-
   $Res call({Either<HabitFailure, KtList<Habit>> failureOrHabits});
 }
 
@@ -573,9 +521,8 @@ class _$_HabitsReceived implements _HabitsReceived {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInitial,
-    required TResult Function() watchBad,
-    required TResult Function() watchGood,
-    required TResult Function() sortByDate,
+    required TResult Function(bool isSortedByDate) watchBad,
+    required TResult Function(bool isSortedByDate) watchGood,
     required TResult Function(
             Either<HabitFailure, KtList<Habit>> failureOrHabits)
         habitsReceived,
@@ -587,9 +534,8 @@ class _$_HabitsReceived implements _HabitsReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInitial,
-    TResult Function()? watchBad,
-    TResult Function()? watchGood,
-    TResult Function()? sortByDate,
+    TResult Function(bool isSortedByDate)? watchBad,
+    TResult Function(bool isSortedByDate)? watchGood,
     TResult Function(Either<HabitFailure, KtList<Habit>> failureOrHabits)?
         habitsReceived,
     required TResult orElse(),
@@ -606,7 +552,6 @@ class _$_HabitsReceived implements _HabitsReceived {
     required TResult Function(_GetInitial value) getInitial,
     required TResult Function(_GetBad value) watchBad,
     required TResult Function(_GetGood value) watchGood,
-    required TResult Function(_SortByDate value) sortByDate,
     required TResult Function(_HabitsReceived value) habitsReceived,
   }) {
     return habitsReceived(this);
@@ -618,7 +563,6 @@ class _$_HabitsReceived implements _HabitsReceived {
     TResult Function(_GetInitial value)? getInitial,
     TResult Function(_GetBad value)? watchBad,
     TResult Function(_GetGood value)? watchGood,
-    TResult Function(_SortByDate value)? sortByDate,
     TResult Function(_HabitsReceived value)? habitsReceived,
     required TResult orElse(),
   }) {
@@ -652,9 +596,10 @@ class _$HabitWatcherStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(KtList<Habit> habits) {
+  _LoadSuccess loadSuccess(KtList<Habit> habits, {required bool isTypeGood}) {
     return _LoadSuccess(
       habits,
+      isTypeGood: isTypeGood,
     );
   }
 
@@ -674,7 +619,8 @@ mixin _$HabitWatcherState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Habit> habits) loadSuccess,
+    required TResult Function(KtList<Habit> habits, bool isTypeGood)
+        loadSuccess,
     required TResult Function(HabitFailure habitFailure) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -682,7 +628,7 @@ mixin _$HabitWatcherState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Habit> habits)? loadSuccess,
+    TResult Function(KtList<Habit> habits, bool isTypeGood)? loadSuccess,
     TResult Function(HabitFailure habitFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -762,7 +708,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Habit> habits) loadSuccess,
+    required TResult Function(KtList<Habit> habits, bool isTypeGood)
+        loadSuccess,
     required TResult Function(HabitFailure habitFailure) loadFailure,
   }) {
     return initial();
@@ -773,7 +720,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Habit> habits)? loadSuccess,
+    TResult Function(KtList<Habit> habits, bool isTypeGood)? loadSuccess,
     TResult Function(HabitFailure habitFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -856,7 +803,8 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Habit> habits) loadSuccess,
+    required TResult Function(KtList<Habit> habits, bool isTypeGood)
+        loadSuccess,
     required TResult Function(HabitFailure habitFailure) loadFailure,
   }) {
     return loadInProgress();
@@ -867,7 +815,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Habit> habits)? loadSuccess,
+    TResult Function(KtList<Habit> habits, bool isTypeGood)? loadSuccess,
     TResult Function(HabitFailure habitFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -913,7 +861,8 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({KtList<Habit> habits});
+
+  $Res call({KtList<Habit> habits, bool isTypeGood});
 }
 
 /// @nodoc
@@ -930,12 +879,17 @@ class __$LoadSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? habits = freezed,
+    Object? isTypeGood = freezed,
   }) {
     return _then(_LoadSuccess(
       habits == freezed
           ? _value.habits
           : habits // ignore: cast_nullable_to_non_nullable
               as KtList<Habit>,
+      isTypeGood: isTypeGood == freezed
+          ? _value.isTypeGood
+          : isTypeGood // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -943,14 +897,16 @@ class __$LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(this.habits);
+  const _$_LoadSuccess(this.habits, {required this.isTypeGood});
 
   @override
   final KtList<Habit> habits;
+  @override
+  final bool isTypeGood;
 
   @override
   String toString() {
-    return 'HabitWatcherState.loadSuccess(habits: $habits)';
+    return 'HabitWatcherState.loadSuccess(habits: $habits, isTypeGood: $isTypeGood)';
   }
 
   @override
@@ -958,12 +914,17 @@ class _$_LoadSuccess implements _LoadSuccess {
     return identical(this, other) ||
         (other is _LoadSuccess &&
             (identical(other.habits, habits) ||
-                const DeepCollectionEquality().equals(other.habits, habits)));
+                const DeepCollectionEquality().equals(other.habits, habits)) &&
+            (identical(other.isTypeGood, isTypeGood) ||
+                const DeepCollectionEquality()
+                    .equals(other.isTypeGood, isTypeGood)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(habits);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(habits) ^
+      const DeepCollectionEquality().hash(isTypeGood);
 
   @JsonKey(ignore: true)
   @override
@@ -975,10 +936,11 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Habit> habits) loadSuccess,
+    required TResult Function(KtList<Habit> habits, bool isTypeGood)
+        loadSuccess,
     required TResult Function(HabitFailure habitFailure) loadFailure,
   }) {
-    return loadSuccess(habits);
+    return loadSuccess(habits, isTypeGood);
   }
 
   @override
@@ -986,12 +948,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Habit> habits)? loadSuccess,
+    TResult Function(KtList<Habit> habits, bool isTypeGood)? loadSuccess,
     TResult Function(HabitFailure habitFailure)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(habits);
+      return loadSuccess(habits, isTypeGood);
     }
     return orElse();
   }
@@ -1024,9 +986,13 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements HabitWatcherState {
-  const factory _LoadSuccess(KtList<Habit> habits) = _$_LoadSuccess;
+  const factory _LoadSuccess(KtList<Habit> habits, {required bool isTypeGood}) =
+      _$_LoadSuccess;
 
   KtList<Habit> get habits => throw _privateConstructorUsedError;
+
+  bool get isTypeGood => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1109,7 +1075,8 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Habit> habits) loadSuccess,
+    required TResult Function(KtList<Habit> habits, bool isTypeGood)
+        loadSuccess,
     required TResult Function(HabitFailure habitFailure) loadFailure,
   }) {
     return loadFailure(habitFailure);
@@ -1120,7 +1087,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Habit> habits)? loadSuccess,
+    TResult Function(KtList<Habit> habits, bool isTypeGood)? loadSuccess,
     TResult Function(HabitFailure habitFailure)? loadFailure,
     required TResult orElse(),
   }) {

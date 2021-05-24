@@ -7,7 +7,9 @@ import 'package:habit_tracking_test/application/habits/habit_watcher/habit_watch
 import 'package:habit_tracking_test/presentation/habits/habit_overview/widgets/habits_overview_body.dart';
 import 'package:habit_tracking_test/presentation/injection.dart';
 import 'package:habit_tracking_test/presentation/router/app_router.gr.dart';
+import 'package:provider/provider.dart';
 
+import 'misc/habit_sorter_notifier.dart';
 import 'widgets/habits_overview_bottom_bar.dart';
 import 'widgets/habits_tab_bar.dart';
 
@@ -19,7 +21,7 @@ class HabitsOverviewPage extends StatelessWidget {
         BlocProvider(
             create: (context) => getIt<HabitWatcherBloc>()
               ..add(const HabitWatcherEvent.getInitial())
-              ..add(const HabitWatcherEvent.watchGood())),
+              ..add(const HabitWatcherEvent.watchGood(isSortedByDate: false))),
         BlocProvider(create: (context) => getIt<HabitActorBloc>()),
       ],
       child: BlocListener<HabitActorBloc, HabitActorState>(
@@ -49,23 +51,26 @@ class HabitsOverviewPage extends StatelessWidget {
               },
               orElse: () {});
         },
-        child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            title: const Text('Habits'),
-            bottom: HabitsTabBar(),
+        child: ChangeNotifierProvider(
+          create: (_) => HabitSorter(isSortedByDate: false),
+          child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            appBar: AppBar(
+              title: const Text('Habits'),
+              bottom: HabitsTabBar(),
+            ),
+            body: HabitsOverviewBody(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton(
+              tooltip: 'Create new habit',
+              onPressed: () {
+                context.router.push(HabitFormPageRoute(editedHabit: null));
+              },
+              child: const Icon(Icons.add),
+            ),
+            bottomNavigationBar: HabitsOverviewBottomBar(),
           ),
-          body: HabitsOverviewBody(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-            tooltip: 'Create new habit',
-            onPressed: () {
-              context.router.push(HabitFormPageRoute(editedHabit: null));
-            },
-            child: const Icon(Icons.add),
-          ),
-          bottomNavigationBar: HabitsOverviewBottomBar(),
         ),
       ),
     );

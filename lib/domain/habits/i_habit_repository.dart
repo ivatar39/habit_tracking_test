@@ -4,9 +4,11 @@ import 'package:habit_tracking_test/domain/habits/habit_failure.dart';
 import 'package:kt_dart/collection.dart';
 
 abstract class IHabitRepository {
-  Stream<Either<HabitFailure, KtList<Habit>>> watchGood();
+  Stream<Either<HabitFailure, KtList<Habit>>> watchGood(
+      {required bool isSortedByDate});
 
-  Stream<Either<HabitFailure, KtList<Habit>>> watchBad();
+  Stream<Either<HabitFailure, KtList<Habit>>> watchBad(
+      {required bool isSortedByDate});
 
   Future<Either<HabitFailure, KtList<Habit>>> sortByDate();
 

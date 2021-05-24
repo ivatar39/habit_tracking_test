@@ -6,8 +6,8 @@ class HabitWatcherState with _$HabitWatcherState {
 
   const factory HabitWatcherState.loadInProgress() = _LoadInProgress;
 
-  const factory HabitWatcherState.loadSuccess(KtList<Habit> habits) =
-      _LoadSuccess;
+  const factory HabitWatcherState.loadSuccess(KtList<Habit> habits,
+      {required bool isTypeGood}) = _LoadSuccess;
 
   const factory HabitWatcherState.loadFailure(HabitFailure habitFailure) =
       _LoadFailure;

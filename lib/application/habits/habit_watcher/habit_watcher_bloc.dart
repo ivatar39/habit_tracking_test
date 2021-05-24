@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:habit_tracking_test/domain/habits/habit.dart';
 import 'package:habit_tracking_test/domain/habits/habit_failure.dart';
 import 'package:habit_tracking_test/domain/habits/i_habit_repository.dart';
+import 'package:habit_tracking_test/domain/habits/value_objects.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
@@ -31,34 +32,29 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
         yield const HabitWatcherState.loadInProgress();
         final failureOrHabits = await _repository.read();
         yield failureOrHabits.fold(
-          (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
-          (habits) => HabitWatcherState.loadSuccess(habits),
+              (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
+          (habits) => HabitWatcherState.loadSuccess(habits, isTypeGood: true),
         );
       },
       watchBad: (e) async* {
         yield const HabitWatcherState.loadInProgress();
-        _habitStreamSubscription = _repository.watchBad().listen(
-            (failureOrHabits) =>
+        _habitStreamSubscription = _repository
+            .watchBad(isSortedByDate: e.isSortedByDate)
+            .listen((failureOrHabits) =>
                 add(HabitWatcherEvent.habitsReceived(failureOrHabits)));
       },
       watchGood: (e) async* {
         yield const HabitWatcherState.loadInProgress();
-        _habitStreamSubscription = _repository.watchGood().listen(
-            (failureOrHabits) =>
+        _habitStreamSubscription = _repository
+            .watchGood(isSortedByDate: e.isSortedByDate)
+            .listen((failureOrHabits) =>
                 add(HabitWatcherEvent.habitsReceived(failureOrHabits)));
-      },
-      sortByDate: (e) async* {
-        yield const HabitWatcherState.loadInProgress();
-        final failureOrSorted = await _repository.sortByDate();
-        yield failureOrSorted.fold(
-          (habitFailure) => HabitWatcherState.loadFailure(habitFailure),
-          (habits) => HabitWatcherState.loadSuccess(habits),
-        );
       },
       habitsReceived: (e) async* {
         yield e.failureOrHabits.fold(
-          (f) => HabitWatcherState.loadFailure(f),
-          (habits) => HabitWatcherState.loadSuccess(habits),
+              (f) => HabitWatcherState.loadFailure(f),
+          (habits) => HabitWatcherState.loadSuccess(habits,
+              isTypeGood: habits.first().type == Type.good()),
         );
       },
     );

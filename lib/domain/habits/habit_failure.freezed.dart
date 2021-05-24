@@ -501,7 +501,6 @@ abstract class _$ServerErrorCopyWith<$Res> {
   factory _$ServerErrorCopyWith(
           _ServerError value, $Res Function(_ServerError) then) =
       __$ServerErrorCopyWithImpl<$Res>;
-
   $Res call({String code});
 }
 
@@ -620,7 +619,6 @@ abstract class _ServerError implements HabitFailure {
   const factory _ServerError(String code) = _$_ServerError;
 
   String get code => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$ServerErrorCopyWith<_ServerError> get copyWith =>
       throw _privateConstructorUsedError;
