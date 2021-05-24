@@ -66,7 +66,8 @@ class HabitRepository implements IHabitRepository {
     debugPrint('Update $habit');
     if (await _connectivity.checkConnectivity() != ConnectivityResult.none) {
       try {
-        final HabitDto dto = HabitDto.fromDomain(habit);
+        final updatedHabit = habit.copyWith(dateCreated: DateTime.now());
+        final HabitDto dto = HabitDto.fromDomain(updatedHabit);
 
         final result = await _dio.put('/habit', data: jsonEncode(dto.toJson()));
         debugPrint(result.statusMessage);
@@ -209,6 +210,7 @@ class HabitRepository implements IHabitRepository {
         final completedHabit = habit.copyWith(
           count: Count((habit.count.number + 1).toString()),
           datesList: datesList,
+          dateCreated: DateTime.now(),
         );
 
         final HabitDto dto = HabitDto.fromDomain(completedHabit);
@@ -221,6 +223,8 @@ class HabitRepository implements IHabitRepository {
           data: jsonEncode(map),
         );
         debugPrint(response.statusMessage);
+        final result = await _dio.put('/habit', data: jsonEncode(dto.toJson()));
+        debugPrint(result.toString());
 
         await Hive.box<HabitDto>('habits').put(dto.uid, dto);
 
@@ -246,6 +250,24 @@ class HabitRepository implements IHabitRepository {
       final dtoList = Hive.box<HabitDto>('habits').values.toList();
       dtoList.sort((a, b) => a.date.compareTo(b.date));
       return right(KtList.from(dtoList.map((e) => e.toDomain())));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      return left(const HabitFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<HabitFailure, KtList<Habit>>> searchByQuery(
+      String query) async {
+    debugPrint('Search by query: $query');
+    try {
+      final habitDtoBox = Hive.box<HabitDto>('habits');
+
+      final searchedDtoList = habitDtoBox.values.where((dto) =>
+          dto.title.contains(query) || dto.description.contains(query));
+      debugPrint(searchedDtoList.toString());
+
+      return right(KtList.from(searchedDtoList.map((e) => e.toDomain())));
     } on Exception catch (e) {
       debugPrint(e.toString());
       return left(const HabitFailure.unexpected());

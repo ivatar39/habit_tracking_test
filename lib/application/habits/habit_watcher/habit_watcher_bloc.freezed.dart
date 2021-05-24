@@ -202,7 +202,6 @@ abstract class _GetInitial implements HabitWatcherEvent {
 abstract class _$GetBadCopyWith<$Res> {
   factory _$GetBadCopyWith(_GetBad value, $Res Function(_GetBad) then) =
       __$GetBadCopyWithImpl<$Res>;
-
   $Res call({bool isSortedByDate});
 }
 
@@ -320,7 +319,6 @@ abstract class _GetBad implements HabitWatcherEvent {
   const factory _GetBad({required bool isSortedByDate}) = _$_GetBad;
 
   bool get isSortedByDate => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$GetBadCopyWith<_GetBad> get copyWith => throw _privateConstructorUsedError;
 }
@@ -329,7 +327,6 @@ abstract class _GetBad implements HabitWatcherEvent {
 abstract class _$GetGoodCopyWith<$Res> {
   factory _$GetGoodCopyWith(_GetGood value, $Res Function(_GetGood) then) =
       __$GetGoodCopyWithImpl<$Res>;
-
   $Res call({bool isSortedByDate});
 }
 
@@ -447,7 +444,6 @@ abstract class _GetGood implements HabitWatcherEvent {
   const factory _GetGood({required bool isSortedByDate}) = _$_GetGood;
 
   bool get isSortedByDate => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$GetGoodCopyWith<_GetGood> get copyWith =>
       throw _privateConstructorUsedError;
@@ -861,7 +857,6 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-
   $Res call({KtList<Habit> habits, bool isTypeGood});
 }
 
@@ -990,9 +985,7 @@ abstract class _LoadSuccess implements HabitWatcherState {
       _$_LoadSuccess;
 
   KtList<Habit> get habits => throw _privateConstructorUsedError;
-
   bool get isTypeGood => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;

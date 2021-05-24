@@ -10,6 +10,8 @@ abstract class IHabitRepository {
   Stream<Either<HabitFailure, KtList<Habit>>> watchBad(
       {required bool isSortedByDate});
 
+  Future<Either<HabitFailure, KtList<Habit>>> searchByQuery(String query);
+
   Future<Either<HabitFailure, KtList<Habit>>> sortByDate();
 
   Future<Either<HabitFailure, Unit>> create(Habit habit);

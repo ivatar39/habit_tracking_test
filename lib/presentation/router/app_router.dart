@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:habit_tracking_test/presentation/habits/habit_form/habit_form_page.dart';
 import 'package:habit_tracking_test/presentation/habits/habit_overview/habits_overview_page.dart';
+import 'package:habit_tracking_test/presentation/habits/habit_search/habit_search_page.dart';
 import 'package:habit_tracking_test/presentation/splash/splash_page.dart';
 
 @MaterialAutoRouter(
@@ -11,6 +12,7 @@ import 'package:habit_tracking_test/presentation/splash/splash_page.dart';
       page: HabitsOverviewPage,
     ),
     AutoRoute(page: HabitFormPage, fullscreenDialog: true),
+    AutoRoute(page: HabitSearchPage, fullscreenDialog: true),
   ],
 )
 class $AppRouter {}

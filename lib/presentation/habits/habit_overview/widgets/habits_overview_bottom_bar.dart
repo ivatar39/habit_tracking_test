@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracking_test/application/habits/habit_watcher/habit_watcher_bloc.dart';
 import 'package:habit_tracking_test/presentation/habits/habit_overview/misc/build_context_x.dart';
+import 'package:habit_tracking_test/presentation/router/app_router.gr.dart';
 
 class HabitsOverviewBottomBar extends StatelessWidget {
   @override
@@ -22,28 +23,28 @@ class HabitsOverviewBottomBar extends StatelessWidget {
                       return SizedBox(
                         height: 100,
                         child: ListTile(
-                            leading: const Text('Sort by: '),
-                            trailing: TextButton(
-                              onPressed: () {
-                                context.habitSorter = !context.habitSorter;
-                                state.maybeMap(
-                                    orElse: () {},
-                                    loadSuccess: (state) {
-                                      context.read<HabitWatcherBloc>().add(
-                                          state.isTypeGood
-                                              ? HabitWatcherEvent.watchGood(
-                                                  isSortedByDate:
-                                                      context.habitSorter)
-                                              : HabitWatcherEvent.watchBad(
-                                                  isSortedByDate:
-                                                      context.habitSorter));
-                                    });
-                                context.router.pop();
-                              },
-                              child: Text(context.habitSorter
-                                  ? 'Date of creation'
-                                  : 'My order'),
-                            )),
+                          leading: const Text('Sort by: '),
+                          trailing: TextButton(
+                            onPressed: () {
+                              context.habitSorter = !context.habitSorter;
+                              state.maybeMap(
+                                  orElse: () {},
+                                  loadSuccess: (state) {
+                                    context.read<HabitWatcherBloc>().add(state
+                                            .isTypeGood
+                                        ? HabitWatcherEvent.watchGood(
+                                            isSortedByDate: context.habitSorter)
+                                        : HabitWatcherEvent.watchBad(
+                                            isSortedByDate:
+                                                context.habitSorter));
+                                  });
+                              context.router.pop();
+                            },
+                            child: Text(context.habitSorter
+                                ? 'Date of creation'
+                                : 'My order'),
+                          ),
+                        ),
                       );
                     },
                   );
@@ -51,7 +52,9 @@ class HabitsOverviewBottomBar extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.search),
-                onPressed: () {},
+                onPressed: () {
+                  context.router.push(const HabitSearchPageRoute());
+                },
               ),
             ],
           ),

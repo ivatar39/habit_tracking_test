@@ -17,10 +17,12 @@ dependencies:
   another_flushbar: ^1.10.22
   implicitly_animated_reorderable_list: ^0.4.0
 
+
   # Functional programming
   dartz: ^0.10.0-nullsafety.2
   rxdart: ^0.27.0
   kt_dart: ^0.9.1
+  material_floating_search_bar: ^0.3.4
 
   # State management
   flutter_bloc: ^7.0.0

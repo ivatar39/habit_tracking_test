@@ -51,11 +51,15 @@ class HabitWatcherBloc extends Bloc<HabitWatcherEvent, HabitWatcherState> {
                 add(HabitWatcherEvent.habitsReceived(failureOrHabits)));
       },
       habitsReceived: (e) async* {
-        yield e.failureOrHabits.fold(
-              (f) => HabitWatcherState.loadFailure(f),
-          (habits) => HabitWatcherState.loadSuccess(habits,
-              isTypeGood: habits.first().type == Type.good()),
-        );
+        yield e.failureOrHabits.fold((f) => HabitWatcherState.loadFailure(f),
+            (habits) {
+          final isNotEmpty = habits.isNotEmpty();
+          if (isNotEmpty) {
+            return HabitWatcherState.loadSuccess(habits,
+                isTypeGood: habits.first().type == Type.good());
+          }
+          return HabitWatcherState.loadSuccess(habits, isTypeGood: true);
+        });
       },
     );
   }
