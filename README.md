@@ -3,7 +3,7 @@
 A new Flutter project for demonstration purposes.
 
 ## Demo
-<img src="https://github.com/ivatar39/habit_tracking_test/blob/main/Screenrecorder-2021-05-17-13-46-53-970.gif" width="360">
+<img src="https://github.com/ivatar39/habit_tracking_test/blob/main/Screenrecorder-2021-05-24-21-30-37-181%5B1%5D.gif" width="360">
 
 ## Explanation
 So I've chosen DDD (Domain Driven Design) as architectural pattern for this app, so it relies heavily on domain layer, 
