@@ -160,7 +160,7 @@ class HabitRepository implements IHabitRepository {
   Stream<Either<HabitFailure, KtList<Habit>>> watchBad(
       {required bool isSortedByDate}) async* {
     debugPrint('Get bad date: $isSortedByDate');
-    final habitDtoBox = Hive.box<HabitDto>('habits');
+    final habitDtoBox = await Hive.openBox<HabitDto>('habits');
 
     final Stream<BoxEvent> stream =
         habitDtoBox.watch().startWith(BoxEvent(null, null, false));
@@ -181,7 +181,7 @@ class HabitRepository implements IHabitRepository {
   Stream<Either<HabitFailure, KtList<Habit>>> watchGood(
       {required bool isSortedByDate}) async* {
     debugPrint('Get good date: $isSortedByDate');
-    final habitDtoBox = Hive.box<HabitDto>('habits');
+    final habitDtoBox = await Hive.openBox<HabitDto>('habits');
 
     final Stream stream =
         habitDtoBox.watch().startWith(BoxEvent(null, null, false));

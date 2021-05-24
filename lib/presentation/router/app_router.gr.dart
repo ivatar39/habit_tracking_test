@@ -46,8 +46,7 @@ class AppRouter extends _i1.RootStackRouter {
   };
 
   @override
-  List<_i1.RouteConfig> get routes =>
-      [
+  List<_i1.RouteConfig> get routes => [
         _i1.RouteConfig(SplashPageRoute.name, path: '/'),
         _i1.RouteConfig(HabitsOverviewPageRoute.name,
             path: '/habits-overview-page'),
